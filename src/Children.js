@@ -6,17 +6,17 @@ export default class Children extends Component {
   
  state = {
     isLoading: true,
-    users: [],
+    children: [],
     error: null
   };
 
-  fetchUsers() {
+  fetchchildren() {
     fetch('https://tryfamly.co/api/daycare/tablet/group?groupId=11fc220c-ebba-4e55-9346-cd1eed714620&accessToken=234ffdb8-0889-4be3-b096-97ab1679752c&institutionId=fb6c8114-387e-4051-8cf7-4e388a77b673')
       .then(response => response.json())
       .then(data => data.children)
       .then(data =>
         this.setState({
-          users: data,
+          children: data,
           isLoading: false,
         })
       )
@@ -24,10 +24,10 @@ export default class Children extends Component {
   }
 
   componentDidMount() {
-    this.fetchUsers();
+    this.fetchchildren();
   }
   render() {
-    const { isLoading, users, error } = this.state;
+    const { isLoading, children, error } = this.state;
     return (
       
       <React.Fragment>
@@ -43,9 +43,9 @@ export default class Children extends Component {
         >
         {error ? <p>{error.message}</p> : null}
         {!isLoading ? (
-          users.slice(0, 8).map(user => {
-            const {name, childId, firstName, lastName, image, small, large } = user;
-            console.log(user);
+          children.slice(0, 8).map(child => {
+            const {name, childId, firstName, lastName, image, small, large } = child;
+            console.log(child);
             
             return (
               
@@ -71,5 +71,3 @@ export default class Children extends Component {
     );
   }
 }
-
-
